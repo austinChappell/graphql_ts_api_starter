@@ -1,0 +1,9 @@
+scalar Date
+
+input QueryParams {
+  limit: Int
+  orderBy: String
+  page: Int
+  q: String
+  sort: String
+}

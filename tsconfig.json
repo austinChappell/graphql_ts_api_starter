@@ -1,0 +1,73 @@
+{
+  "compilerOptions": {
+    "lib": [
+      "dom",
+      "es5",
+      "es6"
+    ],
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "module": "commonjs",
+    "esModuleInterop": true,
+    "target": "es6",
+    "noImplicitAny": false, // TODO: set this to true
+    "moduleResolution": "node",
+    "sourceMap": true,
+    "skipLibCheck": true,
+    "outDir": "dist",
+    "baseUrl": ".",
+    "paths": {
+      "config": [
+        "src/config"
+      ],
+      "config/*": [
+        "src/config/*"
+      ],
+      "constants": [
+        "src/constants"
+      ],
+      "constants/*": [
+        "src/constants/*"
+      ],
+      "gql": [
+        "src/gql"
+      ],
+      "gql/*": [
+        "src/gql/*"
+      ],
+      "repository": [
+        "src/repository"
+      ],
+      "repository/*": [
+        "src/repository/*"
+      ],
+      "temp": [
+        "src/temp"
+      ],
+      "temp/*": [
+        "src/temp/*"
+      ],
+      "types": [
+        "src/types"
+      ],
+      "types/*": [
+        "src/types/*"
+      ],
+      "utils": [
+        "src/utils"
+      ],
+      "utils/*": [
+        "src/utils/*"
+      ],
+      "*": [
+        "node_modules/*"
+      ]
+    }
+  },
+  "include": [
+    "src/**/*"
+  ],
+  "files": [
+    "src/types/index.ts"
+  ]
+}

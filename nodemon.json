@@ -1,0 +1,15 @@
+{
+  "watch": [
+    "src"
+  ],
+  "ext": "ts",
+  "ignore": [
+    "src/**/*.test.ts"
+  ],
+  "env": {
+    "NODE_PATH": "./src",
+    "TS_NODE_FILES": true
+  },
+  "exec": "ts-node-dev --transpile-only src",
+  "restartable": "rs"
+}
