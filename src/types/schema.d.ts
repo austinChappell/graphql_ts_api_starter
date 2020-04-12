@@ -23,8 +23,18 @@ column: number;
 interface IQuery {
 __typename: "Query";
 self: IUser;
+post: IPost;
+posts: IPostAll;
 user: IUser;
 users: IUserAll;
+}
+
+interface IPostOnQueryArguments {
+id: string;
+}
+
+interface IPostsOnQueryArguments {
+queryParams?: IQueryParams | null;
 }
 
 interface IUserOnQueryArguments {
@@ -41,6 +51,15 @@ email: string;
 firstName: string;
 id: string;
 lastName: string;
+posts: Array<IPost>;
+}
+
+interface IPost {
+__typename: "Post";
+author: IUser;
+body: string;
+id: string;
+title: string;
 }
 
 interface IQueryParams {
@@ -49,6 +68,12 @@ orderBy?: string | null;
 page?: number | null;
 q?: string | null;
 sort?: string | null;
+}
+
+interface IPostAll {
+__typename: "PostAll";
+data: Array<IPost> | null;
+fullCount: number;
 }
 
 interface IUserAll {
@@ -63,6 +88,9 @@ signIn: IUser;
 signOut: boolean;
 signUp: IUser;
 updateSelf: IUser;
+createPost: IPost;
+deletePost: boolean;
+updatePost: IPost;
 }
 
 interface ISignInOnMutationArguments {
@@ -75,6 +103,19 @@ input: ISignUpArgs;
 
 interface IUpdateSelfOnMutationArguments {
 input: IUpdateSelfArgs;
+}
+
+interface ICreatePostOnMutationArguments {
+input: ICreatePostInput;
+}
+
+interface IDeletePostOnMutationArguments {
+id: string;
+}
+
+interface IUpdatePostOnMutationArguments {
+id: string;
+input: IUpdatePostInput;
 }
 
 interface ISignInArgs {
@@ -94,6 +135,16 @@ firstName?: string | null;
 lastName?: string | null;
 email?: string | null;
 password?: string | null;
+}
+
+interface ICreatePostInput {
+body: string;
+title: string;
+}
+
+interface IUpdatePostInput {
+body?: string | null;
+title?: string | null;
 }
 }
 

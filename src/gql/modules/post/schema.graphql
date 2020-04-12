@@ -1,3 +1,13 @@
+input CreatePostInput {
+  body: String!
+  title: String!
+}
+
+input UpdatePostInput {
+  body: String
+  title: String
+}
+
 type PostAll {
   data: [Post!]
   fullCount: Int!
@@ -12,6 +22,11 @@ type Post {
 
 type Query {
   post(id: ID!): Post!
-
   posts(queryParams: QueryParams): PostAll!
+}
+
+type Mutation {
+  createPost(input: CreatePostInput!): Post!
+  deletePost(id: ID!): Boolean!
+  updatePost(id: ID! input: UpdatePostInput!): Post!
 }

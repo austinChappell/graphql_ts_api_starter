@@ -21,7 +21,7 @@ export interface Queries {
   // Auth
   self: Resolver;
 
-  // User
+  // Post
   post: Resolver;
   posts: Resolver;
 
@@ -36,4 +36,9 @@ export interface Mutations {
   signOut: Resolver;
   signUp: Resolver<GQL.ISignUpOnMutationArguments>;
   updateSelf: Resolver<GQL.IUpdateSelfOnMutationArguments>;
+
+  // Post
+  createPost: Resolver<GQL.ICreatePostOnMutationArguments>;
+  deletePost: Resolver<GQL.IDeletePostOnMutationArguments>;
+  updatePost: Resolver<GQL.IUpdatePostOnMutationArguments>;
 }
