@@ -76,6 +76,14 @@ export const mutations: Partial<Mutations> = {
 
   signUp: async (_parent, args, ctx) => {
     try {
+      const existingUser = await userRepo.findOne({
+        email: args.input.email.trim().toLowerCase(),
+      });
+
+      if (existingUser) {
+        throw new Error('A user already exists with this email.');
+      }
+
       const user = await userRepo.create(args.input);
 
       setToken(ctx, user);
