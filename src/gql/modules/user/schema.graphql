@@ -8,6 +8,7 @@ type User {
   firstName: String!
   id: ID!
   lastName: String!
+  posts: [Post!]!
 }
 
 type Query {
