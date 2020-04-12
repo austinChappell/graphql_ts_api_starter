@@ -1,0 +1,54 @@
+scalar Date
+
+type Mutation {
+  signIn(input: SignInArgs): User!
+  signOut: Boolean!
+  signUp(input: SignUpArgs!): User!
+  updateSelf(input: UpdateSelfArgs!): User!
+}
+
+type Query {
+  self: User!
+  user(id: ID!): User!
+  users(queryParams: QueryParams): UserAll!
+}
+
+input QueryParams {
+  limit: Int
+  orderBy: String
+  page: Int
+  q: String
+  sort: String
+}
+
+input SignInArgs {
+  email: String!
+  password: String!
+}
+
+input SignUpArgs {
+  firstName: String!
+  lastName: String!
+  email: String!
+  password: String!
+}
+
+input UpdateSelfArgs {
+  firstName: String
+  lastName: String
+  email: String
+  password: String
+}
+
+type User {
+  email: String!
+  firstName: String!
+  id: ID!
+  lastName: String!
+}
+
+type UserAll {
+  data: [User!]
+  fullCount: Int!
+}
+

@@ -6,12 +6,14 @@ config();
 import bodyParser from 'body-parser';
 import { cyan, magenta } from 'colors/safe';
 import compression from 'compression';
+import cookieParser from 'cookie-parser';
 import express, { Express } from 'express';
 import morgan from 'morgan';
 import rateLimit from 'express-rate-limit';
 
 // Internal Dependencies
 import keys from 'config/keys';
+import { setUserMiddleware } from 'utils/middlewares';
 
 // Local Variables
 const limiter = rateLimit({
@@ -51,6 +53,7 @@ class App {
     this.express.use(express.static('public'));
     this.express.use(bodyParser.urlencoded({ extended: false }));
     this.express.use(bodyParser.json({ limit: '50mb' }));
+    this.express.use(cookieParser());
 
     this.express.use((req, res, next) => {
       const origin = Array.isArray(req.headers.origin)
@@ -74,6 +77,8 @@ class App {
         next();
       }
     });
+
+    this.express.use(setUserMiddleware);
 
     // logger
     if (NODE_ENV !== 'test') {

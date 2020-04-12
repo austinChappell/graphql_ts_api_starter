@@ -1,11 +1,13 @@
 // Internal Dependencies
-import UserRepo from '../../../repository/userRepo';
-import { PermissionMiddleware } from 'utils';
-
-// Local Variables
-const userRepo = new UserRepo();
+import {
+  authMiddleware,
+  PermissionMiddleware,
+} from 'utils/middlewares';
 
 export const middlewares: PermissionMiddleware = {
-  Query: {},
+  Query: {
+    user: authMiddleware(),
+    users: authMiddleware(),
+  },
   Mutation: {},
 };

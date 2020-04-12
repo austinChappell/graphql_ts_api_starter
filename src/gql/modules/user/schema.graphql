@@ -3,20 +3,6 @@ type UserAll {
   fullCount: Int!
 }
 
-input UserArgs {
-  firstName: String!
-  lastName: String!
-  email: String!
-  password: String!
-}
-
-input UserUpdateArgs {
-  firstName: String
-  lastName: String
-  email: String
-  password: String
-}
-
 type User {
   email: String!
   firstName: String!
@@ -28,15 +14,4 @@ type Query {
   user(id: ID!): User!
 
   users(queryParams: QueryParams): UserAll!
-
-  usersByIds(ids: [ID!]!): [User]
-}
-
-type Mutation {
-  createUser(input: UserArgs!): User!
-
-  updateUser(
-    input: UserUpdateArgs!
-    id: ID!
-  ): User!
 }

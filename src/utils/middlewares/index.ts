@@ -5,6 +5,10 @@ import { Rule, RuleAnd, RuleOr } from 'graphql-shield/dist/rules';
 // Internal Dependencies
 import { genMiddlewares } from './genMiddlewares';
 
+export * from './authMiddleware';
+export * from './getUserIdFromCtx';
+export * from './setUserMiddleware';
+
 // Local Typings
 export interface PermissionMiddleware {
   Query?: {

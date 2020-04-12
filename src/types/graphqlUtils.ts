@@ -1,11 +1,11 @@
 import { Context, Info } from './context';
 
-export type Resolver<T = any> = (
+export type Resolver<T = any, R = any> = (
   parent: any,
   args: T,
   context: Context,
   info: Info<T>
-) => any;
+) => R;
 
 export interface ResolverMap {
   [key: string]: Resolver;
@@ -18,14 +18,18 @@ export interface MappedResolvers {
 }
 
 export interface Queries {
-  // User Queries
-  user: Resolver;
+  // Auth
+  self: Resolver;
+
+  // User
+  user: Resolver<any>;
   users: Resolver;
-  usersByIds: Resolver;
 }
 
 export interface Mutations {
-  // User Mutations
-  createUser: Resolver;
-  updateUser: Resolver;
+  // Auth
+  signIn: Resolver<GQL.ISignInOnMutationArguments>;
+  signOut: Resolver;
+  signUp: Resolver<GQL.ISignUpOnMutationArguments>;
+  updateSelf: Resolver<GQL.IUpdateSelfOnMutationArguments>;
 }

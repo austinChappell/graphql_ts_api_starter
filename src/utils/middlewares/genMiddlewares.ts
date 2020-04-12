@@ -3,7 +3,7 @@ import * as glob from 'glob';
 import merge from 'lodash.merge';
 
 const genMiddlewaresArray = () => {
-  const pathToModules = path.join(__dirname, '../../../../gql/modules');
+  const pathToModules = path.join(__dirname, '../../gql/modules');
 
   /* eslint-disable global-require  */
   /* eslint-disable import/no-dynamic-require */

@@ -34,11 +34,13 @@
   "author": "Austin Chappell",
   "license": "ISC",
   "dependencies": {
+    "@gql2ts/from-schema": "^2.0.0-4",
     "apollo-server-express": "^2.12.0",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
     "colors": "^1.4.0",
     "compression": "^1.7.4",
+    "cookie-parser": "^1.4.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "express-rate-limit": "^5.1.1",

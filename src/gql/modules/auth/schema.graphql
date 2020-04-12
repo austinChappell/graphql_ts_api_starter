@@ -1,0 +1,29 @@
+input SignInArgs {
+  email: String!
+  password: String!
+}
+
+input SignUpArgs {
+  firstName: String!
+  lastName: String!
+  email: String!
+  password: String!
+}
+
+input UpdateSelfArgs {
+  firstName: String
+  lastName: String
+  email: String
+  password: String
+}
+
+type Query {
+  self: User!
+}
+
+type Mutation {
+  signIn(input: SignInArgs): User!
+  signOut: Boolean!
+  signUp(input: SignUpArgs!): User!
+  updateSelf(input: UpdateSelfArgs!): User!
+}

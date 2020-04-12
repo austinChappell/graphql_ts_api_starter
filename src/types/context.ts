@@ -33,3 +33,16 @@ export interface Info<VariableValues = any> {
     cacheHine: any;
   }
 }
+
+export interface TokenPayload {
+  user: {
+    email: string;
+    id: string;
+  }
+}
+
+export class AuthError extends Error {
+  constructor() {
+    super('Not authorized');
+  }
+}
