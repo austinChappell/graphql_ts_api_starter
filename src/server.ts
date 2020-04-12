@@ -1,4 +1,5 @@
 import { ApolloServer } from 'apollo-server-express';
+import depthLimit from 'graphql-depth-limit'
 import { applyMiddleware } from 'graphql-middleware';
 
 import { genSchema } from 'utils/genSchema';
@@ -22,6 +23,7 @@ export const server = new ApolloServer({
   uploads: {
     maxFileSize: 26214400, // 25mb
   },
+  validationRules: [depthLimit(10)],
 });
 
 server.applyMiddleware({ app }); // app is from an existing express app
