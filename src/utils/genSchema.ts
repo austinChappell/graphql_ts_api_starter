@@ -6,6 +6,7 @@ import {
 } from 'merge-graphql-schemas';
 import { makeExecutableSchema } from 'graphql-tools';
 import * as glob from 'glob';
+import { AuthenticationDirective } from 'gql/directives';
 
 export const genSchema = () => {
   const pathToModules = path.join(__dirname, '../gql/modules');
@@ -22,6 +23,9 @@ export const genSchema = () => {
   /* eslint-enable import/no-dynamic-require */
 
   return makeExecutableSchema({
+    schemaDirectives: {
+      authentication: AuthenticationDirective,
+    },
     typeDefs: mergeTypes(graphqlTypes),
     resolvers: mergeResolvers<unknown, any>(resolvers),
   });

@@ -21,12 +21,12 @@ type Post {
 }
 
 type Query {
-  post(id: ID!): Post!
+  post(id: ID!): Post! @authentication
   posts(queryParams: QueryParams): PostAll!
 }
 
 type Mutation {
-  createPost(input: CreatePostInput!): Post!
-  deletePost(id: ID!): Boolean!
-  updatePost(id: ID! input: UpdatePostInput!): Post!
+  createPost(input: CreatePostInput!): Post! @authentication
+  deletePost(id: ID!): Boolean! @authentication
+  updatePost(id: ID! input: UpdatePostInput!): Post! @authentication
 }
