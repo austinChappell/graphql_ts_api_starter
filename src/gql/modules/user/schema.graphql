@@ -12,7 +12,7 @@ type User {
 }
 
 type Query {
-  user(id: ID!): User!
+  user(id: ID!): User! @authentication
 
-  users(queryParams: QueryParams): UserAll!
+  users(queryParams: QueryParams): UserAll! @authentication
 }
