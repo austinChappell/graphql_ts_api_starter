@@ -5,6 +5,12 @@ declare namespace DB {
     updatedAt: Date;
   }
 
+  interface Post extends BaseTable {
+    authorId: string;
+    body: string;
+    title: string;
+  }
+
   interface User extends BaseTable {
     email: string;
     firstName: string;

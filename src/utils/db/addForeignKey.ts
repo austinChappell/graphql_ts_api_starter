@@ -16,7 +16,7 @@ export function addForeignKey(
     columnName,
     deleteAction = 'RESTRICT',
     isInt = false,
-    isNullable = true,
+    isNullable = false,
     referenceColumn = 'id',
     tableName,
     updateAction = 'CASCADE',

@@ -1,0 +1,17 @@
+type PostAll {
+  data: [Post!]
+  fullCount: Int!
+}
+
+type Post {
+  author: User!
+  body: String!
+  id: ID!
+  title: String!
+}
+
+type Query {
+  post(id: ID!): Post!
+
+  posts(queryParams: QueryParams): PostAll!
+}

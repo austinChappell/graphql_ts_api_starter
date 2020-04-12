@@ -1,11 +1,11 @@
 import { Context, Info } from './context';
 
-export type Resolver<T = any, R = any> = (
+export type Resolver<T = any> = (
   parent: any,
   args: T,
   context: Context,
   info: Info<T>
-) => R;
+) => any;
 
 export interface ResolverMap {
   [key: string]: Resolver;
@@ -22,7 +22,11 @@ export interface Queries {
   self: Resolver;
 
   // User
-  user: Resolver<any>;
+  post: Resolver;
+  posts: Resolver;
+
+  // User
+  user: Resolver;
   users: Resolver;
 }
 
