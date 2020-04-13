@@ -5,18 +5,18 @@ const postRepo = new PostRepo();
 
 export const queries: Partial<Queries> = {
   posts: async (_parent, args) => {
-    const users = await postRepo.findWhere({}, args.queryParams);
+    const posts = await postRepo.findWhere({}, args.queryParams);
 
-    return users;
+    return posts;
   },
 
   post: async (_parent, args) => {
-    const user = await postRepo.getById(args.id);
+    const post = await postRepo.getById(args.id);
 
-    if (!user) {
+    if (!post) {
       throw new Error('Post not found.');
     }
 
-    return user;
+    return post;
   },
 };
