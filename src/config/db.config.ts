@@ -18,4 +18,5 @@ const envConfig = configs[environment];
 const isTest = process.env.NODE_ENV === 'test';
 
 export const db = knex({ ...envConfig });
+
 export const dbConfig = isTest ? process.env.TEST_DB_URL : process.env.DB_URL;

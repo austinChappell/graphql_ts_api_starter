@@ -99,6 +99,8 @@ export default class BaseRepo<T = any> {
 
         const data = await query;
 
+        console.log(`${this.tableName}: Getting all`);
+
         return data as T[];
       } catch (error) {
         throw new Error(dbErrorMessage);
@@ -111,6 +113,9 @@ export default class BaseRepo<T = any> {
       try {
         const data = await db(this.tableName)
           .where({ id });
+
+        console.log(`${this.tableName}: Getting by id ${id}`);
+
         return data[0];
       } catch (error) {
         throw new Error(dbErrorMessage);
@@ -127,6 +132,8 @@ export default class BaseRepo<T = any> {
           .from(this.tableName)
           .whereIn(column, valArr);
 
+        console.log(`${this.tableName}: Getting many by ${column}: ${valArr}`)
+
         return data as T[];
       } catch (error) {
         throw new Error(dbErrorMessage);
@@ -137,6 +144,8 @@ export default class BaseRepo<T = any> {
       try {
         const data = await db(this.tableName)
           .whereIn('id', ids);
+
+        console.log(`${this.tableName}: Getting many by id: ${ids}`)
 
         return data;
       } catch (error) {
@@ -188,6 +197,8 @@ export default class BaseRepo<T = any> {
           data: normalizedData,
           fullCount,
         };
+
+        console.log(`${this.tableName}: find where`);
 
         return result;
       } catch (error) {
