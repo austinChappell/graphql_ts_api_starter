@@ -1,0 +1,92 @@
+input SignInArgs {
+  email: String!
+  password: String!
+}
+
+input SignUpArgs {
+  firstName: String!
+  lastName: String!
+  email: String!
+  password: String!
+}
+
+input UpdateSelfArgs {
+  firstName: String
+  lastName: String
+  email: String
+  password: String
+}
+
+type Query {
+  self: User!
+  post(id: ID!): Post! @authentication
+  posts(queryParams: QueryParams): PostAll!
+  user(id: ID!): User! @authentication
+  users(queryParams: QueryParams): UserAll! @authentication
+}
+
+type Mutation {
+  signIn(input: SignInArgs): User!
+  signOut: Boolean!
+  signUp(input: SignUpArgs!): User!
+  updateSelf(input: UpdateSelfArgs!): User!
+  createPost(input: CreatePostInput!): Post! @authentication
+  deletePost(id: ID!): Boolean! @authentication
+  updatePost(id: ID!, input: UpdatePostInput!): Post! @authentication
+}
+
+input CreatePostInput {
+  body: String!
+  title: String! @length(min: 5)
+}
+
+input UpdatePostInput {
+  body: String
+  title: String
+}
+
+type PostAll {
+  data: [Post!]
+  fullCount: Int!
+}
+
+type Post {
+  author: User!
+  body: String!
+  id: ID!
+  title: String!
+}
+
+directive @authentication on FIELD | FIELD_DEFINITION | MUTATION | QUERY
+
+directive @length(min: Int, max: Int) on INPUT_FIELD_DEFINITION
+
+scalar Date
+
+scalar Upload
+
+input QueryParams {
+  limit: Int
+  orderBy: String
+  page: Int
+  q: String
+  sort: String
+}
+
+type UserAll {
+  data: [User!]
+  fullCount: Int!
+}
+
+type User {
+  email: String!
+  firstName: String!
+  id: ID!
+  lastName: String!
+  posts: [Post!]!
+}
+
+schema {
+  query: Query
+  mutation: Mutation
+}

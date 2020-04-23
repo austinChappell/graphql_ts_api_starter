@@ -6,13 +6,29 @@ import {
 } from 'merge-graphql-schemas';
 import { makeExecutableSchema } from 'graphql-tools';
 import * as glob from 'glob';
-import { AuthenticationDirective } from 'gql/directives';
+import { AuthenticationDirective, LengthDirective } from 'gql/directives';
 
 export const genSchema = () => {
   const pathToModules = path.join(__dirname, '../gql/modules');
   const graphqlTypes = glob
     .sync(`${pathToModules}/**/*.graphql`)
     .map((x) => fs.readFileSync(x, { encoding: 'utf8' }));
+
+  if (process.env.NODE_ENV === 'development') {
+    // eslint-disable-next-line no-restricted-syntax
+    console.log('writing schema...');
+
+    fs.writeFile(
+      path.join(__dirname, '../types/schema.graphql'),
+      mergeTypes(graphqlTypes),
+      (err) => {
+        if (err) {
+          // eslint-disable-next-line no-restricted-syntax
+          console.log(err);
+        }
+      }
+    );
+  }
 
   /* eslint-disable global-require  */
   /* eslint-disable import/no-dynamic-require */
@@ -25,6 +41,7 @@ export const genSchema = () => {
   return makeExecutableSchema({
     schemaDirectives: {
       authentication: AuthenticationDirective,
+      length: LengthDirective,
     },
     typeDefs: mergeTypes(graphqlTypes),
     resolvers: mergeResolvers<unknown, any>(resolvers),

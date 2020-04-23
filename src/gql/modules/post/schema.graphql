@@ -1,6 +1,6 @@
 input CreatePostInput {
   body: String!
-  title: String!
+  title: String! @length(min: 5)
 }
 
 input UpdatePostInput {
