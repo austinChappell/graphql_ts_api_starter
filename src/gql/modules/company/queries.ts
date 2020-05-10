@@ -32,7 +32,7 @@ export const queries: Partial<Queries> = {
     const companyIdsFromSkills = await getCompanyIdsFromSkillIds(args.where?.skillIds);
     const companyIdsFromIndustries = await getCompanyIdsFromIndustryIds(args.where?.industryIds);
 
-    let companyIds: string[];
+    let companyIds: string[] = null;
 
     if (companyIdsFromIndustries && companyIdsFromSkills) {
       companyIds = [];
@@ -42,9 +42,9 @@ export const queries: Partial<Queries> = {
           companyIds.push(id);
         }
       })
-    } else if (!companyIdsFromIndustries) {
+    } else if (!companyIdsFromIndustries && companyIdsFromSkills) {
       companyIds = [...companyIdsFromSkills];
-    } else if (!companyIdsFromSkills) {
+    } else if (!companyIdsFromSkills && companyIdsFromIndustries) {
       companyIds = [...companyIdsFromIndustries];
     }
 
