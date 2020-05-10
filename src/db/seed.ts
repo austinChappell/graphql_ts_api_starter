@@ -7,10 +7,16 @@ import { seedData } from './seedHelpers';
 import CompanyRepo from '../repository/companyRepo';
 import UserRepo from '../repository/userRepo';
 import { WorkType } from 'constants/index';
+import SkillRepo from 'repository/skillRepo';
+import UserSkillRepo from 'repository/userSkillRepo';
 
 // Local Variables
 const companyRepo = new CompanyRepo();
+const skillRepo = new SkillRepo();
+const userSkillsRepo = new UserSkillRepo();
 const userRepo = new UserRepo();
+
+const numOfUsers = 200;
 
 const defaultSeedUserIds = [
   'fef348eb-b4c7-421a-8597-475f42e3a625',
@@ -28,12 +34,14 @@ const getRandomUser = (user: Partial<DB.User>): Partial<DB.User> => ({
   location: 'Dallas, TX',
   password: 'password123',
   phoneNumber: '1234567890',
-  workTypeId: WorkType.FullTime,
+  workTypeId: Math.ceil(Math.random() * 3),
   email: faker.internet.email(),
   firstName: faker.name.firstName(),
   lastName: faker.name.lastName(),
   ...user,
 });
+
+const randomUsers = new Array(numOfUsers).fill(true).map(() => getRandomUser({}));
 
 const getRandomCompany = (company: Partial<DB.Company>): Partial<DB.Company> => ({
   contactEmail: 'example@company.com',
@@ -74,33 +82,7 @@ const users: Partial<DB.User>[] = [
     id: defaultSeedUserIds[4],
     lastName: 'Smith',
   }),
-  getRandomUser({}),
-  getRandomUser({}),
-  getRandomUser({}),
-  getRandomUser({}),
-  getRandomUser({}),
-  getRandomUser({}),
-  getRandomUser({}),
-  getRandomUser({}),
-  getRandomUser({}),
-  getRandomUser({}),
-  getRandomUser({}),
-  getRandomUser({}),
-  getRandomUser({}),
-  getRandomUser({}),
-  getRandomUser({}),
-  getRandomUser({}),
-  getRandomUser({}),
-  getRandomUser({}),
-  getRandomUser({}),
-  getRandomUser({}),
-  getRandomUser({}),
-  getRandomUser({}),
-  getRandomUser({}),
-  getRandomUser({}),
-  getRandomUser({}),
-  getRandomUser({}),
-  getRandomUser({}),
+  ...randomUsers,
 ];
 
 const companies: Partial<DB.Company>[] = [
@@ -111,8 +93,22 @@ const companies: Partial<DB.Company>[] = [
   getRandomCompany({}),
 ];
 
+const getUserSkills = async (): Promise<Partial<DB.UserSkill>[]> => {
+  const dbUsers = await userRepo.getAll();
+  const skills = await skillRepo.getAll();
+
+  return dbUsers.map(user => ({
+    skillId: skills[Math.floor(Math.random() * skills.length)].id,
+    userId: user.id,
+  }));
+}
+
 const runSeed = async () => {
   await seedData(userRepo, users);
+
+  const userSkills = await getUserSkills();
+
+  await seedData(userSkillsRepo, userSkills);
   await seedData(companyRepo, companies);
 };
 

@@ -11,7 +11,7 @@ export const TABLES = {
 }
 
 export enum WorkType {
-  FullTime = 1,
-  PartTime,
+  ['Full Time'] = 1,
+  ['Part Time'],
   Either,
 }

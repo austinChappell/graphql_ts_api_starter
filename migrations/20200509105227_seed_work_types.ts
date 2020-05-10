@@ -3,12 +3,12 @@ import * as Knex from 'knex';
 import { TABLES, WorkType } from '../src/constants';
 
 const fullTime = {
-  id: WorkType.FullTime,
-  label: WorkType[WorkType.FullTime],
+  id: WorkType['Full Time'],
+  label: WorkType[WorkType['Full Time']],
 };
 const partTime = {
-  id: WorkType.PartTime,
-  label: WorkType[WorkType.PartTime],
+  id: WorkType['Part Time'],
+  label: WorkType[WorkType['Part Time']],
 };
 const either = {
   id: WorkType.Either,
