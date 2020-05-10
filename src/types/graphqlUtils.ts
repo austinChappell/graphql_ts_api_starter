@@ -23,7 +23,7 @@ export interface Queries {
 
   // Company
   company: Resolver;
-  companies: Resolver;
+  companies: Resolver<GQL.ICompaniesOnQueryArguments>;
 
   // Industry
   industries: Resolver;

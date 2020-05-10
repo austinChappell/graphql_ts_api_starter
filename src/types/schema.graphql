@@ -20,7 +20,7 @@ input UpdateSelfArgs {
 type Query {
   self: User!
   company(id: ID!): Company! @authentication
-  companies(queryParams: QueryParams): CompanyAll!
+  companies(queryParams: QueryParams, where: CompanyWhere): CompanyAll!
   industries: [Industry!]!
   skills: [Skill!]!
   user(id: ID!): User! @authentication
@@ -52,6 +52,11 @@ input UpdateCompanyInput {
   industryIds: [ID!]
   link: String
   name: String
+}
+
+input CompanyWhere {
+  industryIds: [ID!]
+  skillIds: [ID!]
 }
 
 type CompanyAll {

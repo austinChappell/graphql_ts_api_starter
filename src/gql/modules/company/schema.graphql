@@ -14,6 +14,11 @@ input UpdateCompanyInput {
   name: String
 }
 
+input CompanyWhere {
+  industryIds: [ID!]
+  skillIds: [ID!]
+}
+
 type CompanyAll {
   data: [Company!]
   fullCount: Int!
@@ -31,7 +36,10 @@ type Company {
 
 type Query {
   company(id: ID!): Company! @authentication
-  companies(queryParams: QueryParams): CompanyAll!
+  companies(
+    queryParams: QueryParams
+    where: CompanyWhere
+  ): CompanyAll!
 }
 
 type Mutation {

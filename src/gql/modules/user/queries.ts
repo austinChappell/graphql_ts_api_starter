@@ -19,10 +19,6 @@ const getUserIdsFromSkillIds = async (skillIds?: string[]): Promise<string[] | n
 
 export const queries: Partial<Queries> = {
   users: async (_parent, args) => {
-    const page = args.queryParams?.page || 1;
-    const pageSizeParam = args.queryParams?.pageSize || 12;
-    const pageSize = pageSizeParam > 100 ? 100 : pageSizeParam;
-
     const userIds = await getUserIdsFromSkillIds(args.where?.skillIds);
 
     const where: {
@@ -31,8 +27,6 @@ export const queries: Partial<Queries> = {
       ...args.where?.workTypeId && { workTypeId: args.where.workTypeId },
       ...userIds && { id: userIds },
     };
-
-    console.log({ userIds });
 
     const users = await userRepo.findWhere(where, args.queryParams);
 

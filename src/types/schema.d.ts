@@ -38,6 +38,7 @@ id: string;
 
 interface ICompaniesOnQueryArguments {
 queryParams?: IQueryParams | null;
+where?: ICompanyWhere | null;
 }
 
 interface IUserOnQueryArguments {
@@ -108,6 +109,11 @@ page: number;
 pageSize: number;
 q?: string | null;
 sort?: string | null;
+}
+
+interface ICompanyWhere {
+industryIds?: Array<string> | null;
+skillIds?: Array<string> | null;
 }
 
 interface ICompanyAll {
