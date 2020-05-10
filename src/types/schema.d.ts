@@ -109,6 +109,7 @@ fullCount: number;
 }
 
 interface IUserWhere {
+skillIds?: Array<string> | null;
 workTypeId?: string | null;
 }
 

@@ -99,6 +99,7 @@ type UserAll {
 }
 
 input UserWhere {
+  skillIds: [ID!]
   workTypeId: ID
 }
 
