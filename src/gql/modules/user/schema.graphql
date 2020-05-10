@@ -8,6 +8,12 @@ input UserWhere {
   workTypeId: ID
 }
 
+type ResumeAttachment {
+  id: ID!
+  label: String!
+  url: String!
+}
+
 type User {
   dateAvailable: String!
   email: String!
@@ -19,6 +25,7 @@ type User {
   linkedInUrl: String!
   location: String!
   phoneNumber: String!
+  resumeAttachments: [ResumeAttachment!]!
   skills: [Skill!]!
   workType: WorkType!
 }

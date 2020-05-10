@@ -61,8 +61,16 @@ lastName: string;
 linkedInUrl: string;
 location: string;
 phoneNumber: string;
+resumeAttachments: Array<IResumeAttachment>;
 skills: Array<ISkill>;
 workType: IWorkType;
+}
+
+interface IResumeAttachment {
+__typename: "ResumeAttachment";
+id: string;
+label: string;
+url: string;
 }
 
 interface ISkill {

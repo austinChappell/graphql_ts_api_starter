@@ -6,16 +6,24 @@ import { db } from 'config/db.config';
 import { seedData } from './seedHelpers';
 import CompanyRepo from '../repository/companyRepo';
 import UserRepo from '../repository/userRepo';
-import { WorkType } from 'constants/index';
 import SkillRepo from 'repository/skillRepo';
 import UserSkillRepo from 'repository/userSkillRepo';
+import IndustryRepo from 'repository/industryRepo';
+import CompanyIndustryRepo from 'repository/companyIndustryRepo';
+import CompanySkillRepo from 'repository/companySkillRepo';
+import ResumeAttachmentRepo from 'repository/resumeAttachmentRepo';
 
 // Local Variables
 const companyRepo = new CompanyRepo();
+const companyIndustryRepo = new CompanyIndustryRepo();
+const companySkillRepo = new CompanySkillRepo();
+const industryRepo = new IndustryRepo();
+const resumeAttachmentRepo = new ResumeAttachmentRepo();
 const skillRepo = new SkillRepo();
 const userSkillsRepo = new UserSkillRepo();
 const userRepo = new UserRepo();
 
+const numOfJobs = 200;
 const numOfUsers = 200;
 
 const defaultSeedUserIds = [
@@ -44,12 +52,14 @@ const getRandomUser = (user: Partial<DB.User>): Partial<DB.User> => ({
 const randomUsers = new Array(numOfUsers).fill(true).map(() => getRandomUser({}));
 
 const getRandomCompany = (company: Partial<DB.Company>): Partial<DB.Company> => ({
-  contactEmail: 'example@company.com',
+  contactEmail: faker.internet.email(),
   jobDescription: 'We need a dev',
   link: 'https://www.google.com',
   name: 'Awesome Company',
   ...company,
 });
+
+const companies = new Array(numOfJobs).fill(true).map(() => getRandomCompany({}));
 
 const users: Partial<DB.User>[] = [
   getRandomUser({
@@ -85,13 +95,35 @@ const users: Partial<DB.User>[] = [
   ...randomUsers,
 ];
 
-const companies: Partial<DB.Company>[] = [
-  getRandomCompany({}),
-  getRandomCompany({}),
-  getRandomCompany({}),
-  getRandomCompany({}),
-  getRandomCompany({}),
-];
+const getCompanyIndustries = async (): Promise<Partial<DB.CompanyIndustry>[]> => {
+  const dbCompanies = await companyRepo.getAll();
+  const industries = await industryRepo.getAll();
+
+  return dbCompanies.map(company => ({
+    companyId: company.id,
+    industryId: industries[Math.floor(Math.random() * industries.length)].id,
+  }));
+}
+
+const getCompanySkills = async (): Promise<Partial<DB.UserSkill>[]> => {
+  const dbCompanies = await companyRepo.getAll();
+  const skills = await skillRepo.getAll();
+
+  return dbCompanies.map(company => ({
+    companyId: company.id,
+    skillId: skills[Math.floor(Math.random() * skills.length)].id,
+  }));
+}
+
+const getUserResumes = async (): Promise<Partial<DB.ResumeAttachment>[]> => {
+  const dbUsers = await userRepo.getAll();
+
+  return dbUsers.map(user => ({
+    label: 'My Resume',
+    url: 'https://www.google.com',
+    userId: user.id,
+  }));
+}
 
 const getUserSkills = async (): Promise<Partial<DB.UserSkill>[]> => {
   const dbUsers = await userRepo.getAll();
@@ -105,11 +137,17 @@ const getUserSkills = async (): Promise<Partial<DB.UserSkill>[]> => {
 
 const runSeed = async () => {
   await seedData(userRepo, users);
+  await seedData(companyRepo, companies);
 
+  const companyIndustries = await getCompanyIndustries();
+  const companySkills = await getCompanySkills();
+  const userResumes = await getUserResumes();
   const userSkills = await getUserSkills();
 
+  await seedData(companyIndustryRepo, companyIndustries);
+  await seedData(companySkillRepo, companySkills);
+  await seedData(resumeAttachmentRepo, userResumes);
   await seedData(userSkillsRepo, userSkills);
-  await seedData(companyRepo, companies);
 };
 
 const populateDB = async () => {
