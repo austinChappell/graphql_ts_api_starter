@@ -3,16 +3,27 @@ type UserAll {
   fullCount: Int!
 }
 
+input UserWhere {
+  workTypeId: ID
+}
+
 type User {
+  dateAvailable: String!
   email: String!
   firstName: String!
   id: ID!
+  jobTitle: String!
+  keySkills: String!
   lastName: String!
-  posts: [Post!]!
+  linkedInUrl: String!
+  location: String!
+  phoneNumber: String!
+  skills: [Skill!]!
+  workType: WorkType!
 }
 
 type Query {
   user(id: ID!): User! @authentication
 
-  users(queryParams: QueryParams): UserAll! @authentication
+  users(queryParams: QueryParams, where: UserWhere): UserAll!
 }

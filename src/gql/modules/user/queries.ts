@@ -5,7 +5,7 @@ const userRepo = new UserRepo();
 
 export const queries: Partial<Queries> = {
   users: async (_parent, args) => {
-    const users = await userRepo.findWhere({}, args.queryParams);
+    const users = await userRepo.findWhere(args.where || {}, args.queryParams);
 
     return users;
   },

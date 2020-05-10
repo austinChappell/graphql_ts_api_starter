@@ -1,0 +1,41 @@
+input CreateCompanyInput {
+  contactEmail: String!
+  jobDescription: String!
+  industryIds: [ID!]!
+  link: String!
+  name: String!
+}
+
+input UpdateCompanyInput {
+  contactEmail: String
+  jobDescription: String
+  industryIds: [ID!]
+  link: String
+  name: String
+}
+
+type CompanyAll {
+  data: [Company!]
+  fullCount: Int!
+}
+
+type Company {
+  contactEmail: String!
+  id: ID!
+  industries: [Industry!]!
+  jobDescription: String!
+  link: String!
+  name: String!
+  skills: [Skill!]!
+}
+
+type Query {
+  company(id: ID!): Company! @authentication
+  companies(queryParams: QueryParams): CompanyAll!
+}
+
+type Mutation {
+  createCompany(input: CreateCompanyInput!): Company! @authentication
+  deleteCompany(id: ID!): Boolean! @authentication
+  updateCompany(id: ID! input: UpdateCompanyInput!): Company! @authentication
+}

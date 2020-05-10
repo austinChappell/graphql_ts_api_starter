@@ -1,0 +1,8 @@
+type WorkType {
+  id: ID!
+  label: String!
+}
+
+type Query {
+  workTypes: [WorkType!]!
+}

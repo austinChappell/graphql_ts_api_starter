@@ -4,9 +4,9 @@ scalar Date
 scalar Upload
 
 input QueryParams {
-  limit: Int
   orderBy: String
-  page: Int
+  page: Int!
+  pageSize: Int!
   q: String
   sort: String
 }

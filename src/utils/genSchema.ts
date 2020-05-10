@@ -14,6 +14,22 @@ export const genSchema = () => {
     .sync(`${pathToModules}/**/*.graphql`)
     .map((x) => fs.readFileSync(x, { encoding: 'utf8' }));
 
+  if (process.env.NODE_ENV === 'development') {
+    // eslint-disable-next-line no-restricted-syntax
+    console.log('writing schema...');
+
+    fs.writeFile(
+      path.join(__dirname, '../types/schema.graphql'),
+      mergeTypes(graphqlTypes),
+      (err) => {
+        if (err) {
+          // eslint-disable-next-line no-restricted-syntax
+          console.log(err);
+        }
+      }
+    );
+  }
+
   /* eslint-disable global-require  */
   /* eslint-disable import/no-dynamic-require */
   const resolvers = glob

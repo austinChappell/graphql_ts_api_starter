@@ -1,8 +1,8 @@
-import PostRepo from 'repository/postRepo';
 import { MappedResolvers } from 'types/graphqlUtils';
 import { queries } from './queries';
-
-const postRepo = new PostRepo();
+import { workTypeLoader } from 'gql/dataloaders/workTypeLoader';
+import UserSkillRepo from 'repository/userSkillRepo';
+import { skillLoader } from 'gql/dataloaders/skillLoader';
 
 export const resolvers: MappedResolvers = {
   Query: { ...queries },
@@ -12,8 +12,19 @@ export const resolvers: MappedResolvers = {
     id: (user: DB.User) => user.id,
     firstName: (user: DB.User) => user.firstName,
     lastName: (user: DB.User) => user.lastName,
-    posts: (user: DB.User) => postRepo
-      .findWhere({ authorId: user.id })
-      .then(result => result.data),
+    skills: async (user: DB.User) => {
+      const userSkillRepo = new UserSkillRepo();
+
+      const userSkills = await userSkillRepo
+        .findWhere({ userId: user.id });
+
+      const skills = skillLoader
+        .loadMany(userSkills.data
+          .map(({ skillId }) => skillId)
+        );
+
+      return skills;
+    },
+    workType: (user: DB.User) => workTypeLoader.load(user.workTypeId),
   },
 };

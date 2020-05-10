@@ -1,0 +1,128 @@
+input SignInArgs {
+  email: String!
+  password: String!
+}
+
+input SignUpArgs {
+  firstName: String!
+  lastName: String!
+  email: String!
+  password: String!
+}
+
+input UpdateSelfArgs {
+  firstName: String
+  lastName: String
+  email: String
+  password: String
+}
+
+type Query {
+  self: User!
+  company(id: ID!): Company! @authentication
+  companies(queryParams: QueryParams): CompanyAll!
+  industries: [Industry!]!
+  skills: [Skill!]!
+  user(id: ID!): User! @authentication
+  users(queryParams: QueryParams, where: UserWhere): UserAll!
+  workTypes: [WorkType!]!
+}
+
+type Mutation {
+  signIn(input: SignInArgs): User!
+  signOut: Boolean!
+  signUp(input: SignUpArgs!): User!
+  updateSelf(input: UpdateSelfArgs!): User!
+  createCompany(input: CreateCompanyInput!): Company! @authentication
+  deleteCompany(id: ID!): Boolean! @authentication
+  updateCompany(id: ID!, input: UpdateCompanyInput!): Company! @authentication
+}
+
+input CreateCompanyInput {
+  contactEmail: String!
+  jobDescription: String!
+  industryIds: [ID!]!
+  link: String!
+  name: String!
+}
+
+input UpdateCompanyInput {
+  contactEmail: String
+  jobDescription: String
+  industryIds: [ID!]
+  link: String
+  name: String
+}
+
+type CompanyAll {
+  data: [Company!]
+  fullCount: Int!
+}
+
+type Company {
+  contactEmail: String!
+  id: ID!
+  industries: [Industry!]!
+  jobDescription: String!
+  link: String!
+  name: String!
+  skills: [Skill!]!
+}
+
+type Industry {
+  id: ID!
+  label: String!
+}
+
+directive @authentication on FIELD | FIELD_DEFINITION | MUTATION | QUERY
+
+scalar Date
+
+scalar Upload
+
+input QueryParams {
+  orderBy: String
+  page: Int!
+  pageSize: Int!
+  q: String
+  sort: String
+}
+
+type Skill {
+  id: ID!
+  label: String!
+}
+
+type UserAll {
+  data: [User!]
+  fullCount: Int!
+}
+
+input UserWhere {
+  workTypeId: ID
+}
+
+type User {
+  dateAvailable: String!
+  email: String!
+  firstName: String!
+  id: ID!
+  jobTitle: String!
+  keySkills: String!
+  lastName: String!
+  linkedInUrl: String!
+  location: String!
+  phoneNumber: String!
+  skills: [Skill!]!
+  workType: WorkType!
+}
+
+type WorkType {
+  id: ID!
+  label: String!
+}
+
+schema {
+  query: Query
+  mutation: Mutation
+}

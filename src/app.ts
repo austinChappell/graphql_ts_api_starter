@@ -4,6 +4,7 @@ config();
 
 // External Dependencies
 import bodyParser from 'body-parser';
+import cors from 'cors';
 import { cyan, magenta } from 'colors/safe';
 import compression from 'compression';
 import cookieParser from 'cookie-parser';
@@ -54,6 +55,7 @@ class App {
     this.express.use(bodyParser.urlencoded({ extended: false }));
     this.express.use(bodyParser.json({ limit: '50mb' }));
     this.express.use(cookieParser());
+    this.express.use(cors());
 
     this.express.use((req, res, next) => {
       const origin = Array.isArray(req.headers.origin)

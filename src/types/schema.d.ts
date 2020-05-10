@@ -23,17 +23,20 @@ column: number;
 interface IQuery {
 __typename: "Query";
 self: IUser;
-post: IPost;
-posts: IPostAll;
+company: ICompany;
+companies: ICompanyAll;
+industries: Array<IIndustry>;
+skills: Array<ISkill>;
 user: IUser;
 users: IUserAll;
+workTypes: Array<IWorkType>;
 }
 
-interface IPostOnQueryArguments {
+interface ICompanyOnQueryArguments {
 id: string;
 }
 
-interface IPostsOnQueryArguments {
+interface ICompaniesOnQueryArguments {
 queryParams?: IQueryParams | null;
 }
 
@@ -43,37 +46,70 @@ id: string;
 
 interface IUsersOnQueryArguments {
 queryParams?: IQueryParams | null;
+where?: IUserWhere | null;
 }
 
 interface IUser {
 __typename: "User";
+dateAvailable: string;
 email: string;
 firstName: string;
 id: string;
+jobTitle: string;
+keySkills: string;
 lastName: string;
-posts: Array<IPost>;
+linkedInUrl: string;
+location: string;
+phoneNumber: string;
+skills: Array<ISkill>;
+workType: IWorkType;
 }
 
-interface IPost {
-__typename: "Post";
-author: IUser;
-body: string;
+interface ISkill {
+__typename: "Skill";
 id: string;
-title: string;
+label: string;
+}
+
+interface IWorkType {
+__typename: "WorkType";
+id: string;
+label: string;
+}
+
+interface ICompany {
+__typename: "Company";
+contactEmail: string;
+id: string;
+industries: Array<IIndustry>;
+jobDescription: string;
+link: string;
+name: string;
+skills: Array<ISkill>;
+}
+
+interface IIndustry {
+__typename: "Industry";
+id: string;
+label: string;
 }
 
 interface IQueryParams {
-limit?: number | null;
 orderBy?: string | null;
-page?: number | null;
+page: number;
+pageSize: number;
 q?: string | null;
 sort?: string | null;
 }
 
-interface IPostAll {
-__typename: "PostAll";
-data: Array<IPost> | null;
+interface ICompanyAll {
+__typename: "CompanyAll";
+data: Array<ICompany> | null;
 fullCount: number;
+}
+
+interface IUserWhere {
+workTypeId?: string | null;
 }
 
 interface IUserAll {
@@ -88,9 +124,9 @@ signIn: IUser;
 signOut: boolean;
 signUp: IUser;
 updateSelf: IUser;
-createPost: IPost;
-deletePost: boolean;
-updatePost: IPost;
+createCompany: ICompany;
+deleteCompany: boolean;
+updateCompany: ICompany;
 }
 
 interface ISignInOnMutationArguments {
@@ -105,17 +141,17 @@ interface IUpdateSelfOnMutationArguments {
 input: IUpdateSelfArgs;
 }
 
-interface ICreatePostOnMutationArguments {
-input: ICreatePostInput;
+interface ICreateCompanyOnMutationArguments {
+input: ICreateCompanyInput;
 }
 
-interface IDeletePostOnMutationArguments {
+interface IDeleteCompanyOnMutationArguments {
 id: string;
 }
 
-interface IUpdatePostOnMutationArguments {
+interface IUpdateCompanyOnMutationArguments {
 id: string;
-input: IUpdatePostInput;
+input: IUpdateCompanyInput;
 }
 
 interface ISignInArgs {
@@ -137,14 +173,20 @@ email?: string | null;
 password?: string | null;
 }
 
-interface ICreatePostInput {
-body: string;
-title: string;
+interface ICreateCompanyInput {
+contactEmail: string;
+jobDescription: string;
+industryIds: Array<string>;
+link: string;
+name: string;
 }
 
-interface IUpdatePostInput {
-body?: string | null;
-title?: string | null;
+interface IUpdateCompanyInput {
+contactEmail?: string | null;
+jobDescription?: string | null;
+industryIds?: Array<string> | null;
+link?: string | null;
+name?: string | null;
 }
 }
 

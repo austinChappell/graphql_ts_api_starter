@@ -32,8 +32,8 @@ function paginate(query, queryParams) {
     return query;
   }
 
-  if (queryParams.limit && queryParams.page) {
-    return query.limit(queryParams.limit).offset(queryParams.limit * (queryParams.page - 1));
+  if (queryParams.pageSize && queryParams.page) {
+    return query.limit(queryParams.pageSize).offset(queryParams.pageSize * (queryParams.page - 1));
   }
 
   return query;

@@ -9,9 +9,9 @@ import { convertObjToCamel } from './src/utils/snakeToCamel';
 import keys from './src/config/keys';
 
 const {
-  DB_URL = 'postgresql://localhost/gql_db_dev',
+  DB_URL = 'postgresql://localhost/covid_19_jobs_dev',
   NODE_ENV,
-  TEST_DB_URL = 'postgresql://localhost/gql_db_test',
+  TEST_DB_URL = 'postgresql://localhost/covid_19_jobs_test',
 } = keys;
 
 const isTest = NODE_ENV === 'test';

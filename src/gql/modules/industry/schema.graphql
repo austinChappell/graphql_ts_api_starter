@@ -1,0 +1,8 @@
+type Industry {
+  id: ID!
+  label: String!
+}
+
+type Query {
+  industries: [Industry!]!
+}

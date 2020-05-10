@@ -28,7 +28,7 @@ export default class BaseRepo<T = any> {
   findManyBy: (column: string, valArray: any[]) => Promise<T[]>;
   findOne: (obj: Partial<T>) => Promise<T>;
   findWhere: (
-    conditions: ArrayPartial<T>,
+    conditions: ArrayPartial<T> | { [key: string]: any },
     query?: QueryParams,
   ) => Promise<{
     data: T[];

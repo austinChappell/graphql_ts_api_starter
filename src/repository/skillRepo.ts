@@ -2,10 +2,10 @@
 import BaseRepo from './baseRepo';
 import { TABLES } from 'constants/index';
 
-export default class PostRepo extends BaseRepo<DB.Post> {
+export default class SkillRepo extends BaseRepo<DB.Skill> {
   constructor() {
     super();
 
-    this.tableName = TABLES.POSTS;
+    this.tableName = TABLES.SKILLS;
   }
 }

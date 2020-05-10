@@ -21,13 +21,22 @@ export interface Queries {
   // Auth
   self: Resolver;
 
-  // Post
-  post: Resolver;
-  posts: Resolver;
+  // Company
+  company: Resolver;
+  companies: Resolver;
+
+  // Industry
+  industries: Resolver;
+
+  // Skill
+  skills: Resolver;
 
   // User
   user: Resolver;
-  users: Resolver;
+  users: Resolver<GQL.IUsersOnQueryArguments>;
+
+  // WorkType
+  workTypes: Resolver;
 }
 
 export interface Mutations {
@@ -37,8 +46,8 @@ export interface Mutations {
   signUp: Resolver<GQL.ISignUpOnMutationArguments>;
   updateSelf: Resolver<GQL.IUpdateSelfOnMutationArguments>;
 
-  // Post
-  createPost: Resolver<GQL.ICreatePostOnMutationArguments>;
-  deletePost: Resolver<GQL.IDeletePostOnMutationArguments>;
-  updatePost: Resolver<GQL.IUpdatePostOnMutationArguments>;
+  // Company
+  createCompany: Resolver<GQL.ICreateCompanyOnMutationArguments>;
+  deleteCompany: Resolver<GQL.IDeleteCompanyOnMutationArguments>;
+  updateCompany: Resolver<GQL.IUpdateCompanyOnMutationArguments>;
 }

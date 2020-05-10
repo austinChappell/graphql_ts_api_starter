@@ -18,7 +18,6 @@ const schemaWithMiddleware = applyMiddleware(
 
 export const server = new ApolloServer({
   context: (req) => ({ ...req }),
-  // context: (req) => ({ ...req }),
   schema: schemaWithMiddleware,
   uploads: {
     maxFileSize: 26214400, // 25mb
