@@ -194,6 +194,7 @@ jobDescription: string;
 industryIds: Array<string>;
 link: string;
 name: string;
+skillIds: Array<string>;
 }
 
 interface IUpdateCompanyInput {
@@ -202,6 +203,7 @@ jobDescription?: string | null;
 industryIds?: Array<string> | null;
 link?: string | null;
 name?: string | null;
+skillIds?: Array<string> | null;
 }
 }
 

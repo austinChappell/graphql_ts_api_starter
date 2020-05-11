@@ -33,7 +33,7 @@ type Mutation {
   signOut: Boolean!
   signUp(input: SignUpArgs!): User!
   updateSelf(input: UpdateSelfArgs!): User!
-  createCompany(input: CreateCompanyInput!): Company! @authentication
+  createCompany(input: CreateCompanyInput!): Company!
   deleteCompany(id: ID!): Boolean! @authentication
   updateCompany(id: ID!, input: UpdateCompanyInput!): Company! @authentication
 }
@@ -44,6 +44,7 @@ input CreateCompanyInput {
   industryIds: [ID!]!
   link: String!
   name: String!
+  skillIds: [ID!]!
 }
 
 input UpdateCompanyInput {
@@ -52,6 +53,7 @@ input UpdateCompanyInput {
   industryIds: [ID!]
   link: String
   name: String
+  skillIds: [ID!]
 }
 
 input CompanyWhere {

@@ -1,3 +1,5 @@
+import isEqual from 'lodash.isequal';
+
 import CompanyRepo from 'repository/companyRepo';
 import { Queries } from 'types/graphqlUtils';
 import CompanySkillRepo from 'repository/companySkillRepo';
@@ -12,9 +14,34 @@ const getCompanyIdsFromIndustryIds = async (industryIds?: string[]): Promise<str
     return null;
   }
 
+  const sortedIndustryIds = industryIds.sort((a, b) => a > b ? 1 : -1);
+
   const companyIndustries = await companyIndustryRepo.findWhere({ industryId: industryIds });
 
-  return companyIndustries.data.map(({ companyId }) => companyId);
+  const industryIdsByCompanyId: {
+    [key: string]: string[];
+  } = {};
+
+  const companyIds: string[] = [];
+
+  companyIndustries.data.forEach(({
+    companyId,
+    industryId,
+  }) => {
+    if (industryIdsByCompanyId[companyId]) {
+      industryIdsByCompanyId[companyId].push(industryId)
+    } else {
+      industryIdsByCompanyId[companyId] = [industryId]
+    }
+
+    const sortedIds = industryIdsByCompanyId[companyId].sort((a, b) => a > b ? 1 : -1)
+
+    if (isEqual(sortedIds, sortedIndustryIds)) {
+      companyIds.push(companyId);
+    }
+  });
+
+  return companyIds;
 }
 
 const getCompanyIdsFromSkillIds = async (skillIds?: string[]): Promise<string[] | null> => {
@@ -22,9 +49,34 @@ const getCompanyIdsFromSkillIds = async (skillIds?: string[]): Promise<string[] 
     return null;
   }
 
+  const sortedSkillIds = skillIds.sort((a, b) => a > b ? 1 : -1);
+
   const companySkills = await companySkillRepo.findWhere({ skillId: skillIds });
 
-  return companySkills.data.map(({ companyId }) => companyId);
+  const skillIdsByCompanyId: {
+    [key: string]: string[];
+  } = {};
+
+  const companyIds: string[] = [];
+
+  companySkills.data.forEach(({
+    companyId,
+    skillId,
+  }) => {
+    if (skillIdsByCompanyId[companyId]) {
+      skillIdsByCompanyId[companyId].push(skillId)
+    } else {
+      skillIdsByCompanyId[companyId] = [skillId]
+    }
+
+    const sortedIds = skillIdsByCompanyId[companyId].sort((a, b) => a > b ? 1 : -1)
+
+    if (isEqual(sortedIds, sortedSkillIds)) {
+      companyIds.push(companyId);
+    }
+  });
+
+  return companyIds;
 }
 
 export const queries: Partial<Queries> = {
