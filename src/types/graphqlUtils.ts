@@ -50,4 +50,7 @@ export interface Mutations {
   createCompany: Resolver<GQL.ICreateCompanyOnMutationArguments>;
   deleteCompany: Resolver<GQL.IDeleteCompanyOnMutationArguments>;
   updateCompany: Resolver<GQL.IUpdateCompanyOnMutationArguments>;
+
+  // User
+  createUser: Resolver<GQL.ICreateUserOnMutationArguments>;
 }

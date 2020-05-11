@@ -142,6 +142,7 @@ updateSelf: IUser;
 createCompany: ICompany;
 deleteCompany: boolean;
 updateCompany: ICompany;
+createUser: IUser;
 }
 
 interface ISignInOnMutationArguments {
@@ -167,6 +168,10 @@ id: string;
 interface IUpdateCompanyOnMutationArguments {
 id: string;
 input: IUpdateCompanyInput;
+}
+
+interface ICreateUserOnMutationArguments {
+input?: ICreateUserInput | null;
 }
 
 interface ISignInArgs {
@@ -204,6 +209,24 @@ industryIds?: Array<string> | null;
 link?: string | null;
 name?: string | null;
 skillIds?: Array<string> | null;
+}
+
+interface ICreateUserInput {
+dateAvailable: string;
+email: string;
+firstName: string;
+jobTitle: string;
+keySkills: string;
+lastName: string;
+linkedInUrl: string;
+location: string;
+phoneNumber: string;
+
+/**
+ * resumeAttachments: [ResumeAttachment!]!
+ */
+skillIds: Array<string>;
+workTypeId: string;
 }
 }
 

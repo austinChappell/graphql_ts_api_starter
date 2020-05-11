@@ -1,3 +1,18 @@
+input CreateUserInput {
+  dateAvailable: String!
+  email: String!
+  firstName: String!
+  jobTitle: String!
+  keySkills: String!
+  lastName: String!
+  linkedInUrl: String!
+  location: String!
+  phoneNumber: String!
+  # resumeAttachments: [ResumeAttachment!]!
+  skillIds: [ID!]!
+  workTypeId: ID!
+}
+
 type UserAll {
   data: [User!]
   fullCount: Int!
@@ -37,4 +52,8 @@ type Query {
     queryParams: QueryParams,
     where: UserWhere
   ): UserAll!
+}
+
+type Mutation {
+  createUser(input: CreateUserInput): User!
 }

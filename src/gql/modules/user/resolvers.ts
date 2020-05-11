@@ -4,9 +4,12 @@ import { workTypeLoader } from 'gql/dataloaders/workTypeLoader';
 import ResumeAttachmentRepo from 'repository/resumeAttachmentRepo';
 import UserSkillRepo from 'repository/userSkillRepo';
 import { skillLoader } from 'gql/dataloaders/skillLoader';
+import { mutations } from './mutations';
 
 export const resolvers: MappedResolvers = {
   Query: { ...queries },
+
+  Mutation: { ...mutations },
 
   User: {
     email: (user: DB.User) => user.email,

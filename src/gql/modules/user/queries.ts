@@ -1,3 +1,5 @@
+import isEqual from 'lodash.isequal';
+
 import UserRepo from '../../../repository/userRepo';
 import { Queries } from 'types/graphqlUtils';
 import { db } from 'config/db.config';
@@ -12,9 +14,34 @@ const getUserIdsFromSkillIds = async (skillIds?: string[]): Promise<string[] | n
     return null;
   }
 
+  const sortedSkillIds = skillIds.sort((a, b) => a > b ? 1 : -1);
+
   const userSkills = await userSkillRepo.findWhere({ skillId: skillIds });
 
-  return userSkills.data.map(({ userId }) => userId);
+  const skillIdsByUserId: {
+    [key: string]: string[];
+  } = {};
+
+  const userIds: string[] = [];
+
+  userSkills.data.forEach(({
+    skillId,
+    userId,
+  }) => {
+    if (skillIdsByUserId[userId]) {
+      skillIdsByUserId[userId].push(skillId)
+    } else {
+      skillIdsByUserId[userId] = [skillId]
+    }
+
+    const sortedIds = skillIdsByUserId[userId].sort((a, b) => a > b ? 1 : -1)
+
+    if (isEqual(sortedIds, sortedSkillIds)) {
+      userIds.push(userId);
+    }
+  });
+
+  return userIds;
 }
 
 export const queries: Partial<Queries> = {
