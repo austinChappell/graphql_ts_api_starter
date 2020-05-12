@@ -1,9 +1,11 @@
 // Internal Dependencies
 import { Mutations } from 'types/graphqlUtils';
+import ResumeAttachmentRepo from 'repository/resumeAttachmentRepo';
 import UserRepo from 'repository/userRepo';
 import UserSkillRepo from 'repository/userSkillRepo';
 
 // Local Variables
+const resumeAttachmentRepo = new ResumeAttachmentRepo();
 const userRepo = new UserRepo();
 const userSkillRepo = new UserSkillRepo();
 
@@ -25,6 +27,11 @@ export const mutations: Partial<Mutations> = {
 
     await userSkillRepo.createMany(args.input.skillIds.map(skillId => ({
       skillId,
+      userId: user.id,
+    })));
+
+    await resumeAttachmentRepo.createMany(args.input.resumeAttachments.map(attachment => ({
+      ...attachment,
       userId: user.id,
     })));
 

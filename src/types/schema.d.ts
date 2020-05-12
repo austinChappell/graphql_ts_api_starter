@@ -221,12 +221,14 @@ lastName: string;
 linkedInUrl: string;
 location: string;
 phoneNumber: string;
-
-/**
- * resumeAttachments: [ResumeAttachment!]!
- */
+resumeAttachments: Array<IResumeAttachmentInput>;
 skillIds: Array<string>;
 workTypeId: string;
+}
+
+interface IResumeAttachmentInput {
+label: string;
+url: string;
 }
 }
 

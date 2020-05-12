@@ -8,7 +8,7 @@ input CreateUserInput {
   linkedInUrl: String!
   location: String!
   phoneNumber: String!
-  # resumeAttachments: [ResumeAttachment!]!
+  resumeAttachments: [ResumeAttachmentInput!]!
   skillIds: [ID!]!
   workTypeId: ID!
 }
@@ -21,6 +21,11 @@ type UserAll {
 input UserWhere {
   skillIds: [ID!]
   workTypeId: ID
+}
+
+input ResumeAttachmentInput {
+  label: String!
+  url: String!
 }
 
 type ResumeAttachment {

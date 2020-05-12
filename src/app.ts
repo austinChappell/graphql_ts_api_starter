@@ -15,6 +15,7 @@ import rateLimit from 'express-rate-limit';
 // Internal Dependencies
 import keys from 'config/keys';
 import { setUserMiddleware } from 'utils/middlewares';
+import controllers from './controllers';
 
 // Local Variables
 const limiter = rateLimit({
@@ -43,6 +44,7 @@ class App {
   constructor() {
     this.express = express();
     this.middleware();
+    this.routes();
   }
 
   middleware() {
@@ -94,6 +96,10 @@ class App {
       //  apply rate limiting to all requests
       this.express.use(limiter);
     }
+  }
+
+  routes() {
+    this.express.use('/', controllers);
   }
 }
 
