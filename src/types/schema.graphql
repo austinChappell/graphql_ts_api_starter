@@ -84,6 +84,8 @@ type Industry {
 
 directive @authentication on FIELD | FIELD_DEFINITION | MUTATION | QUERY
 
+directive @length(min: Int, max: Int) on INPUT_FIELD_DEFINITION
+
 scalar Date
 
 scalar Upload
@@ -104,7 +106,7 @@ type Skill {
 input CreateUserInput {
   dateAvailable: String!
   email: String!
-  firstName: String!
+  firstName: String! @length(min: 3)
   jobTitle: String!
   keySkills: String!
   lastName: String!
@@ -138,16 +140,16 @@ type ResumeAttachment {
 }
 
 type User {
-  dateAvailable: String!
+  dateAvailable: String
   email: String!
   firstName: String!
   id: ID!
   jobTitle: String!
-  keySkills: String!
+  keySkills: String
   lastName: String!
-  linkedInUrl: String!
-  location: String!
-  phoneNumber: String!
+  linkedInUrl: String
+  location: String
+  phoneNumber: String
   resumeAttachments: [ResumeAttachment!]!
   skills: [Skill!]!
   workType: WorkType!

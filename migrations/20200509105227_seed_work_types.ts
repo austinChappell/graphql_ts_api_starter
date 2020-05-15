@@ -7,8 +7,8 @@ const fullTime = {
   label: WorkType[WorkType['Full Time']],
 };
 const partTime = {
-  id: WorkType['Part Time'],
-  label: WorkType[WorkType['Part Time']],
+  id: WorkType['Contract'],
+  label: WorkType[WorkType['Contract']],
 };
 const either = {
   id: WorkType.Either,

@@ -6,6 +6,7 @@ import { genSchema } from 'utils/genSchema';
 import keys from './config/keys';
 import app from './app'; // This needs to be imported before graphql shield permission
 import { gqlShieldMiddlewares } from './utils/middlewares/index';
+import { dumpAirtableData } from './utils/dumpAirtableData';
 
 const { PORT = '4000' } = keys;
 
@@ -34,9 +35,16 @@ class Server {
     this.start = () => {
       app.listen({ port: PORT }, () => {
         // eslint-disable-next-line no-restricted-syntax
+
+        this.seedFromAirTable();
         console.log(`🚀 Server ready at http://localhost:${PORT}${server.graphqlPath}`);
       });
     };
+  }
+
+  private async seedFromAirTable() {
+    console.log('seeding from airtable');
+    dumpAirtableData();
   }
 }
 

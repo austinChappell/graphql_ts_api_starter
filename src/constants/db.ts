@@ -1,4 +1,5 @@
 export const TABLES = {
+  AIRTABLE_IDS: 'airtable_ids',
   COMPANIES: 'companies',
   COMPANIES_INDUSTRIES: 'companies_industries',
   COMPANIES_SKILLS: 'companies_skills',
@@ -12,6 +13,6 @@ export const TABLES = {
 
 export enum WorkType {
   ['Full Time'] = 1,
-  ['Part Time'],
+  Contract,
   Either,
 }

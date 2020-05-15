@@ -6,7 +6,10 @@ import {
 } from 'merge-graphql-schemas';
 import { makeExecutableSchema } from 'graphql-tools';
 import * as glob from 'glob';
-import { AuthenticationDirective } from 'gql/directives';
+import {
+  AuthenticationDirective,
+  LengthDirective,
+} from 'gql/directives';
 
 export const genSchema = () => {
   const pathToModules = path.join(__dirname, '../gql/modules');
@@ -41,6 +44,7 @@ export const genSchema = () => {
   return makeExecutableSchema({
     schemaDirectives: {
       authentication: AuthenticationDirective,
+      length: LengthDirective,
     },
     typeDefs: mergeTypes(graphqlTypes),
     resolvers: mergeResolvers<unknown, any>(resolvers),

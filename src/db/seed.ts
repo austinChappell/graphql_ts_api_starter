@@ -23,8 +23,8 @@ const skillRepo = new SkillRepo();
 const userSkillsRepo = new UserSkillRepo();
 const userRepo = new UserRepo();
 
-const numOfJobs = 200;
-const numOfUsers = 200;
+const numOfJobs = 0;
+const numOfUsers = 0;
 
 const defaultSeedUserIds = [
   'fef348eb-b4c7-421a-8597-475f42e3a625',

@@ -1,4 +1,5 @@
 directive @authentication on FIELD | FIELD_DEFINITION | MUTATION | QUERY
+directive @length(min: Int, max: Int) on INPUT_FIELD_DEFINITION
 
 scalar Date
 scalar Upload

@@ -6,16 +6,16 @@ import { addDefaultColumns, addForeignKey } from '../src/utils/db';
 export async function up(knex: Knex): Promise<any> {
   return knex.schema.createTable(TABLES.USERS, ((t) => {
     addDefaultColumns(knex, t);
-    t.date('date_available').notNullable();
+    t.date('date_available');
     t.string('email').notNullable().unique();
     t.string('first_name').notNullable();
     t.string('job_title').notNullable();
-    t.string('key_skills').notNullable();
+    t.string('key_skills', 10000);
     t.string('last_name').notNullable();
-    t.string('linked_in_url').notNullable();
-    t.string('location').notNullable();
+    t.string('linked_in_url');
+    t.string('location');
     t.string('password', 1000).notNullable();
-    t.string('phone_number', 20).notNullable();
+    t.string('phone_number', 20);
 
     addForeignKey(
       t,

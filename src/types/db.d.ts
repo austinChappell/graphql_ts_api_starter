@@ -5,6 +5,10 @@ declare namespace DB {
     updatedAt: Date;
   }
 
+  interface AirtableId extends BaseTable {
+    airtableId: string;
+  }
+
   interface Company extends BaseTable {
     contactEmail: string;
     jobDescription: string;
@@ -42,16 +46,16 @@ declare namespace DB {
   }
 
   interface User extends BaseTable {
-    dateAvailable: string;
+    dateAvailable?: string;
     email: string;
     firstName: string;
     jobTitle: string;
-    keySkills: string;
+    keySkills?: string;
     lastName: string;
-    linkedInUrl: string;
-    location: string;
+    linkedInUrl?: string;
+    location?: string;
     password: string;
-    phoneNumber: string;
+    phoneNumber?: string;
     workTypeId: number;
   }
 

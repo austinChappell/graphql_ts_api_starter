@@ -44,6 +44,7 @@ export default class UserRepo extends BaseRepo<DB.User> {
 
         return user as unknown as DB.User;
       } catch (error) {
+        console.log('error creating user : ', error)
         throw new Error(dbErrorMessage);
       }
     };
