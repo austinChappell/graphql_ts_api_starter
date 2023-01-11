@@ -55,7 +55,7 @@
     "graphql-middleware": "^4.0.2",
     "graphql-shield": "^7.2.3",
     "jsonwebtoken": "^8.5.1",
-    "knex": "^0.20.13",
+    "knex": "^2.4.0",
     "lodash.camelcase": "^4.3.0",
     "lodash.clonedeep": "^4.5.0",
     "lodash.isequal": "^4.5.0",
